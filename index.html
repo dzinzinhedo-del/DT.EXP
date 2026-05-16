@@ -109,7 +109,7 @@ nav a:hover::after { width: 100%; }
 .about-image:hover img { transform: scale(1.04); }
 .about-content h2 { font-size: clamp(22px,3vw,32px); margin-bottom: 16px; }
 .about-content h3 { margin: 18px 0 8px; color: var(--blue); font-size: 18px; }
-.about-content p  { margin-bottom: 16px; text-align: justify; color: var(--text-mid); }
+.about-content p  { margin-bottom: 16px; text-align: left; color: var(--text-mid); }
 .about-content ul { padding-left: 20px; margin-bottom: 16px; }
 .about-content li { margin-bottom: 6px; color: var(--text-mid); }
 
@@ -202,6 +202,8 @@ footer { background: #111; color: #fff; padding: 40px 8% 20px; }
   nav a:last-child { border-bottom: none; }
   nav.active { display: flex; }
   .header-right { display: none; }
+  .lang-switch-mobile { display: flex; justify-content: center; padding: 12px 24px 4px; }
+  .lang-switch-mobile .lang-switch { display: flex; }
   .hero { min-height: 90vh; padding: 90px 6% 50px; justify-content: center; text-align: center; }
   .hero-text { max-width: 100%; } .hero-text h1 { word-spacing: 4px; }
   .hero-buttons { justify-content: center; flex-direction: column; align-items: center; }
@@ -209,8 +211,8 @@ footer { background: #111; color: #fff; padding: 40px 8% 20px; }
   .about { padding: 60px 6%; } .about-container { flex-direction: column; gap: 30px; } .about-image { width: 100%; }
   .section { padding: 60px 6%; } .cards { grid-template-columns: 1fr; }
   .domaines { padding: 60px 6%; } .domaines-container { grid-template-columns: 1fr 1fr; gap: 16px; }
-  .contact { padding: 60px 6%; } .contact-container { flex-direction: column; gap: 40px; }
-  .contact-info, .contact-form { max-width: 100%; min-width: unset; } .contact-form { padding: 24px 20px; }
+  .contact { padding: 60px 6%; } .contact-container { flex-direction: column; gap: 30px; }
+  .contact-info, .contact-form { max-width: 100%; min-width: unset; width: 100%; } .contact-form { padding: 24px 20px; }
   .row { flex-direction: column; } .row input { width: 100%; }
   .footer-container { flex-direction: column; gap: 24px; }
   .footer-left, .footer-center, .footer-right { min-width: unset; text-align: center; }
@@ -241,6 +243,12 @@ footer { background: #111; color: #fff; padding: 40px 8% 20px; }
     <a href="#services" data-i18n="nav_services">Services</a>
     <a href="#domaines" data-i18n="nav_domains">Domaines</a>
     <a href="#contact"  data-i18n="nav_contact">Contact</a>
+    <div class="lang-switch-mobile">
+      <div class="lang-switch">
+        <button onclick="setLang('fr')" id="btn-fr-m" class="active">FR</button>
+        <button onclick="setLang('en')" id="btn-en-m">EN</button>
+      </div>
+    </div>
   </nav>
 
   <div class="header-right">
@@ -490,6 +498,10 @@ function applyLang(l) {
   });
   document.getElementById("btn-fr").classList.toggle("active", l === "fr");
   document.getElementById("btn-en").classList.toggle("active", l === "en");
+  const mfr = document.getElementById("btn-fr-m");
+  const men = document.getElementById("btn-en-m");
+  if (mfr) mfr.classList.toggle("active", l === "fr");
+  if (men) men.classList.toggle("active", l === "en");
   document.documentElement.lang = l;
   lang = l;
 }
